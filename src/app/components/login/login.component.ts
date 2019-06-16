@@ -13,23 +13,24 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
   
   user:User = new User();
-  getState:Observable<any>;
   errorMessage:string | null;
 
   constructor( private store:Store<AppState>) {
-    this.getState=this.store.select('reducer')
+    
    }
 
   ngOnInit() {
-    this.getState.subscribe(
+
+    //Get the error Message from the store
+    this.store.select('reducer').subscribe(
       state=>{
         console.log(state)
         this.errorMessage=state.errorMessage;
-        
       }
     )
   }
-
+  
+  //Dispatch the login Action
   onLogin(){
     console.log(this.user)
     const payload={

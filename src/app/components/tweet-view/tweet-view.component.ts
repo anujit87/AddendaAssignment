@@ -17,6 +17,7 @@ export class TweetViewComponent implements OnInit {
   constructor(private store:Store<AppState>) { }
 
   ngOnInit() {
+    //Get the selected Tweet from the store
     this.store.select('reducer').subscribe(
       state=>{
         console.log(state,state.selectedTweet)
@@ -25,7 +26,8 @@ export class TweetViewComponent implements OnInit {
       }
     )
   }
-
+  
+  //Dispatch the logout action
   logOut(){
     this.store.dispatch(new Logout);
   }

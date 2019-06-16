@@ -9,11 +9,13 @@ export class AuthService {
   tokenTimer:any;
   isAuthenticated:boolean=false;
   constructor( private http:HttpClient) { }
-
+  
+  //Get token from the localstorage
   getToken():string{
     return localStorage.getItem('token');
   }
-
+  
+  //Check if User is Authenticated
   getIsAuthenticated(){
     return this.isAuthenticated;
   }
@@ -41,7 +43,8 @@ export class AuthService {
     localStorage.setItem('token',token);
     this.isAuthenticated=true;
   }
-
+  
+  //Get User Auth data
   getAuth(){
     const token = localStorage.getItem('token');
     const expiryDate = localStorage.getItem('expiryDate');
@@ -54,7 +57,8 @@ export class AuthService {
       }
     }
   }
-
+  
+  //Update the token expiry timer 
   autoAuthUser(){
     const authInfo = this.getAuth();
     if(!authInfo){
@@ -65,9 +69,12 @@ export class AuthService {
     if(expiresIn>0){
       this.isAuthenticated=true;
       this.setAuthTimer(expiresIn/100);
+    }else{
+      this.logout();
     }
   }
-
+  
+  //Logout the user
   logout(){
     clearTimeout(this.tokenTimer)
     localStorage.removeItem('token');

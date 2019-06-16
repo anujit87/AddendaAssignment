@@ -10,6 +10,7 @@ export const initialState: AppState={
     selectedTweet:null
 }
 
+//Get the latest state from the localstorage
 function retrieveState(){
     if(localStorage.getItem('state')){
         return JSON.parse(localStorage.getItem('state'))

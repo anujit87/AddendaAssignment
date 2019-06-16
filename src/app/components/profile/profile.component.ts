@@ -17,7 +17,9 @@ export class ProfileComponent implements OnInit {
   constructor( private store:Store<AppState>) { }
 
   ngOnInit() {
+    //Dispatch FetchTweets Action
     this.store.dispatch(new FetchTweets());
+    //Get the error message and tweets from the store. 
     this.store.select('reducer').subscribe(
       state=>{
         //this.tweets=state.tweets
@@ -31,11 +33,13 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
-
+  
+  //Dispatch Action on clicking the tweet
   onSelectTweet(id){
     this.store.dispatch(new SelectTweet(id));
   }
-
+  
+  //Dispatch Action on logout
   logOut(): void {
     this.store.dispatch(new Logout);
   }
