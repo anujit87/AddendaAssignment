@@ -1,0 +1,44 @@
+<nav class="navbar navbar-light justify-content-between mb-3">
+    <a class="navbar-brand">AppLogo</a>
+    <button class="btn btn-sm btn-success my-2 my-sm-0" (click)="logOut()" type="submit">Logout</button> 
+</nav>
+<div *ngIf="errorMessage">
+    <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+    </div>
+</div>
+<div *ngIf="tweet">
+    <div class="card row">
+        <div class="card-header bg-success" >
+            <h5 class="text-white m-0">{{tweet.user.name}}</h5>
+            <small class="text-light">@{{tweet.user.screen_name}}</small>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <img [src]="tweet.user.profile_image_url" width="200" height="200" class="rounded-circle" alt="">
+                </div>
+                <div class="col-md-8">
+                    <span class="badge badge-success">Tweets: {{tweet.user.statuses_count}}</span>
+                    <span class="badge badge-warning">Followers: {{tweet.user.followers_count}}</span>
+                    <span class="badge badge-danger">Following: {{tweet.user.friends_count}}</span>
+                    <span class="badge badge-primary">Likes: {{tweet.user.favourites_count}}</span>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngIf="tweet.user.description"> <strong>Description:</strong> {{tweet.user.description}}</li>
+                        <li class="list-group-item" *ngIf="tweet.user.location"> <strong>Location:</strong> {{tweet.user.location}}</li>
+                        <li class="list-group-item" > <strong>Joined:</strong> {{tweet.user.created_at | date}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card row mt-2">
+        <div class="card-body m-2">
+            <h6 class="card-title">{{tweet.user.name}}</h6>
+            <p class="card-subtitle text-muted small mb-1">@{{tweet.user.screen_name}} - {{tweet.created_at | date}}</p>
+            <p class="card-text">{{tweet.text}}</p>
+            <span class="text-secondary small mr-1" data-toggle="tooltip" title="Retweet"><i class="fas fa-retweet"></i> {{tweet.retweet_count}}</span>
+                    <span class="text-secondary small" data-toggle="tooltip" title="Likes"><i class="far fa-heart"></i> {{tweet.favorite_count}}</span>
+        </div>
+    </div>
+</div>
